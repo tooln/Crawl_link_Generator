@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domain Input</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        pre {
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-radius: 4px;
+            overflow: auto;
+            white-space: pre-wrap; /* Allows long lines to wrap */
+        }
+    </style>
+</head>
+<body>
+    <h1>Domain Name Input</h1>
+    <textarea id="domainInput" rows="10" placeholder="Enter domain names here, one per line..."></textarea><br>
+    <button onclick="generateLinks()">Generate Links</button>
+    <pre id="output"></pre>
+
+    <script>
+        function generateLinks() {
+            const input = document.getElementById('domainInput').value.trim();
+            const domains = input.split('\n');
+            let output = '';
+
+            domains.forEach(domain => {
+                const trimmedDomain = domain.trim();
+                if (trimmedDomain) {
+                    output += `python script.py -u ${trimmedDomain} -o ${trimmedDomain.split('//')[1]}.txt\n`;
+                }
+            });
+
+            document.getElementById('output').innerText = output || 'Please enter valid domain names.';
+        }
+    </script>
+</body>
+</html>
